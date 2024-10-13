@@ -2,7 +2,8 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); // Import jwt
-const JWT_SECRET = 'your_jwt_secret'; // Ideally, store this in an environment variable
+const JWT_SECRET = process.env.JWT_SECRET;
+
 
 // Register new user
 const registerUser = async (req, res) => {
@@ -18,12 +19,17 @@ const registerUser = async (req, res) => {
             name,
             email,
             password: await bcrypt.hash(password, 10),
+            role: req.body.role || 'student' // Ensure role is assigned, default to student
         });
 
         await user.save();
 
-        // Generate token
-        const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+        // Include role in token
+        const token = jwt.sign(
+            { id: user._id, email: user.email, role: user.role }, // Include role here
+            JWT_SECRET, 
+            { expiresIn: '1h' }
+        );
 
         res.status(201).json({ msg: 'User registered successfully', token });
     } catch (error) {
@@ -47,15 +53,24 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
 
-        // Generate token
-        const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+        // Include role in token
+        const token = jwt.sign(
+            { id: user._id, email: user.email, role: user.role }, // Include role here
+            JWT_SECRET,
+            { expiresIn: '1h' }
+        );
 
-        res.json({ msg: 'Login successful', token });
+        res.json({ 
+            msg: 'Login successful', 
+            token, 
+            role: user.role  // Add the role to the response
+        });
     } catch (error) {
         console.error('Error logging in user:', error.message);
         res.status(500).send('Server error');
     }
 };
+
 
 module.exports = { registerUser, loginUser };
 
