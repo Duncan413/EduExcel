@@ -1,4 +1,5 @@
-EduExcel is an online quiz platform that allows students and learning institutions to track their performance and improve their understanding of a range of concepts.
+
+EduExcel is an online quiz platform that allows students and learning institutions to track their performance and improve their understanding of a range of concepts. 
 
 Teachers can create and manage classes. They are also able to create quizzes and view the performance of classes on quizzes assigned to those classes.
 
