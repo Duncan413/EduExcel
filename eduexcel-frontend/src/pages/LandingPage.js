@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Box, Button, Typography, TextField, Grid, Paper } from '@mui/material';
 import { Link } from 'react-router-dom';
+import "./LandingPage.css"; // Assuming styles will be added here.
 
 const LandingPage = () => {
-  // State for handling contact form submissions
   const [contactFormData, setContactFormData] = useState({
     name: '',
     email: '',
@@ -19,38 +19,28 @@ const LandingPage = () => {
 
   const handleContactSubmit = (e) => {
     e.preventDefault();
-    console.log(contactFormData);
-    // Here, you could add API calls to handle form submission.
-    // For now, it just logs the form data.
     alert('Thank you for your feedback!');
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', backgroundColor: '#f4f6f8', textAlign: 'center' }}>
+    <Box
+      sx={{ minHeight: '100vh', textAlign: 'center', fontFamily: 'Roboto, sans-serif' }}
+      className="landing-page"
+    >
       {/* Hero Section */}
-      <Box sx={{ py: 6, backgroundColor: '#1976d2', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Typography variant="h2" gutterBottom>
-          The Future You Is a Test Acer with EduExcel
+      <Box className="hero-section">
+        <Typography variant="h2" className="hero-title">
+          Revolutionize Learning with EduExcel
         </Typography>
-        <Typography variant="h5" gutterBottom>
-          Empower your learning journey with quizzes, classes, and progress tracking
+        <Typography variant="h5" className="hero-subtitle">
+          Empower your learning journey with engaging quizzes and insights
         </Typography>
-        <Box sx={{ mt: 4 }}>
+        <Box className="hero-buttons">
           <Button
             component={Link}
             to="/login"
-            variant="outlined"
-            sx={{ 
-              mx: 1, 
-              px: 3, 
-              py: 1, 
-              color: 'orange', 
-              borderColor: 'orange', 
-              '&:hover': {
-                backgroundColor: 'orange',
-                color: 'white',
-              }
-            }}
+            variant="contained"
+            className="hero-button"
           >
             Login
           </Button>
@@ -58,17 +48,7 @@ const LandingPage = () => {
             component={Link}
             to="/register"
             variant="outlined"
-            sx={{ 
-              mx: 1, 
-              px: 3, 
-              py: 1, 
-              color: 'orange', 
-              borderColor: 'orange', 
-              '&:hover': {
-                backgroundColor: 'orange',
-                color: 'white',
-              }
-            }}
+            className="hero-button"
           >
             Register
           </Button>
@@ -76,28 +56,31 @@ const LandingPage = () => {
       </Box>
 
       {/* Features Section */}
-      <Box sx={{ py: 6, backgroundColor: '#fff' }}>
-        <Typography variant="h4" gutterBottom>Why EduExcel?</Typography>
-        <Grid container spacing={4} justifyContent="center" sx={{ px: 3 }}>
+      <Box className="features-section">
+        <Typography variant="h4" className="section-title">Why EduExcel?</Typography>
+        <Grid container spacing={4} justifyContent="center">
           <Grid item xs={12} md={4}>
-            <Paper elevation={3} sx={{ p: 3 }}>
-              <Typography variant="h6">Interactive Quizzes</Typography>
+            <Paper elevation={3} className="feature-box">
+              <img src="/icon-1.png" alt="Quizzes" className="feature-icon" />
+              <Typography variant="h6" className="feature-title">Interactive Quizzes</Typography>
               <Typography variant="body1">
                 Test your knowledge with engaging quizzes tailored to your curriculum.
               </Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Paper elevation={3} sx={{ p: 3 }}>
-              <Typography variant="h6">Track Your Progress</Typography>
+            <Paper elevation={3} className="feature-box">
+              <img src="/icon-2.jpeg" alt="Progress" className="feature-icon" />
+              <Typography variant="h6" className="feature-title">Track Your Progress</Typography>
               <Typography variant="body1">
                 See how you're improving with detailed progress tracking.
               </Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Paper elevation={3} sx={{ p: 3 }}>
-              <Typography variant="h6">Personalized Learning</Typography>
+            <Paper elevation={3} className="feature-box">
+              <img src="/icon-3.jpg" alt="Learning" className="feature-icon" />
+              <Typography variant="h6" className="feature-title">Personalized Learning</Typography>
               <Typography variant="body1">
                 Get personalized feedback and insights to improve your learning.
               </Typography>
@@ -107,22 +90,14 @@ const LandingPage = () => {
       </Box>
 
       {/* Contact Us Section */}
-      <Box sx={{ py: 6, backgroundColor: '#f4f6f8', mt: 34 }}>
-        <Typography variant="h4" gutterBottom>Contact Us</Typography>
-        <Typography variant="body1" gutterBottom>
+      <Box className="contact-section">
+        <Typography variant="h4" className="section-title">Contact Us</Typography>
+        <Typography variant="body1" className="section-description">
           Have feedback or questions? We'd love to hear from you.
         </Typography>
         <Box
           component="form"
-          sx={{
-            maxWidth: '600px',
-            mx: 'auto',
-            mt: 4,
-            p: 3,
-            backgroundColor: '#fff',
-            borderRadius: 2,
-            boxShadow: '0px 2px 10px rgba(0,0,0,0.1)',
-          }}
+          className="contact-form"
           onSubmit={handleContactSubmit}
         >
           <TextField
@@ -132,6 +107,7 @@ const LandingPage = () => {
             value={contactFormData.name}
             onChange={handleContactChange}
             margin="normal"
+            className="form-input"
           />
           <TextField
             fullWidth
@@ -141,6 +117,7 @@ const LandingPage = () => {
             value={contactFormData.email}
             onChange={handleContactChange}
             margin="normal"
+            className="form-input"
           />
           <TextField
             fullWidth
@@ -151,13 +128,13 @@ const LandingPage = () => {
             value={contactFormData.message}
             onChange={handleContactChange}
             margin="normal"
+            className="form-input"
           />
           <Button
             fullWidth
             variant="contained"
-            color="primary"
+            className="submit-button"
             type="submit"
-            sx={{ mt: 2 }}
           >
             Submit
           </Button>
@@ -165,16 +142,24 @@ const LandingPage = () => {
       </Box>
 
       {/* Footer Section */}
-      <Box sx={{ py: 2, backgroundColor: '#1976d2', color: '#fff', mt: 6 }}>
+      <Box className="footer-section">
         <Typography variant="body2">
           &copy; {new Date().getFullYear()} EduExcel. All rights reserved.
         </Typography>
+        <Box className="footer-links">
+          <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link> | 
+          <Link to="/terms" className="footer-link">Terms & Conditions</Link>
+        </Box>
       </Box>
     </Box>
   );
 };
 
 export default LandingPage;
+
+
+
+
 
 
 
